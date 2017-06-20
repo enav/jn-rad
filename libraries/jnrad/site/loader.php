@@ -10,7 +10,6 @@ defined('_JEXEC') or die;
 require_once "models/items.php";
 require_once "models/item.php";
 
-require_once "views/landing/view.html.php";
 require_once "views/items/view.html.php";
 require_once "views/item/view.html.php";
 

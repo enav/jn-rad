@@ -4,13 +4,15 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-// No direct access
+// No direct access.
 defined('_JEXEC') or die;
 
 /**
- * JnTrackerHelper class.
+ * Employees controller class.
  */
-class JnTrackerHelper extends JnRadHelper
+class JnTrackerControllerEmployees extends JnRadItemsController
 {
-	//
+	protected $jnrad_asset_singular = 'Employee';
 }
+
+

@@ -8,9 +8,11 @@
 defined('_JEXEC') or die;
 
 /**
- * JnTrackerHelper class.
+ * Employee controller class.
  */
-class JnTrackerHelper extends JnRadHelper
+class JntrackerControllerEmployee extends JnRadItemController
 {
-	//
+	protected $jnrad_asset_singular = 'Employee';
 }
+
+

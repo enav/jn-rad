@@ -10,12 +10,7 @@ $jnrad_vars['jnrad_nameU'] = strtoupper($jnrad_vars["jnrad_name"] );
 
 // default component view
 
-$jnrad_vars["jnrad_vars"]["default_view"] = "landing";
-
-// sidebar
-
-$jnrad_vars["jnrad_vars"]["sidebar.items"][] = "landing";
-$jnrad_vars["jnrad_vars"]["sidebar.items"][] = "employees";
+$jnrad_vars["jnrad_vars"]["default_view"] = "employees";
 
 // employees
 

@@ -7,10 +7,13 @@
 // No direct access
 defined('_JEXEC') or die;
 
+
 /**
- * JnTrackerHelper class.
+ * Employee model class.
  */
-class JnTrackerHelper extends JnRadHelper
+class JnTrackerModelEmployee extends JnRadItemModel
 {
-	//
+	protected $jnrad_asset_singular = 'Employee';
 }
+
+

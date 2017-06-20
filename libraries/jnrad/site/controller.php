@@ -24,8 +24,8 @@ class JnRadController extends JControllerLegacy
 		$jnrad_default_view = $jnrad_vars["default_view"];
 		// -- rad --
 
-		$view = JFactory::getApplication()->input->getCmd('view', $jnrad_default_view);
-		JFactory::getApplication()->input->set('view', $view);
+		$view = $this->input->getCmd('view', $jnrad_default_view);
+		$this->input->set('view', $view);
 
 		parent::display($cachable, $urlparams);
 

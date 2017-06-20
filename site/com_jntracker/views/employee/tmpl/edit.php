@@ -7,10 +7,5 @@
 // No direct access
 defined('_JEXEC') or die;
 
-/**
- * JnTrackerHelper class.
- */
-class JnTrackerHelper extends JnRadHelper
-{
-	//
-}
+require_once JPATH_LIBRARIES.'/jnrad/site/views/item/tmpl/edit.php';
+
