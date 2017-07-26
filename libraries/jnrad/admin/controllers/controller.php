@@ -3,11 +3,15 @@
 // No direct access
 defined('_JEXEC') or die;
 
+
 /**
  * Main controller class
  */
-class JnRadController extends JControllerLegacy
+class JnRadAdminController extends JnRadBaseController
 {
+	public $jnrad = array();
+
+
 	/**
 	 * Method to display a view.
 	 *
@@ -19,12 +23,13 @@ class JnRadController extends JControllerLegacy
 	 */
 	public function display($cachable = false, $urlparams = false)
 	{
-		$helper = JnRadHelper;
-		extract($helper::radVars());
-		$jnrad_default_view = $jnrad_vars["default_view"];
+		$jnrad_helper = JnRadHelper;
+		extract($jnrad_helper::prepare($this->jnrad));
 		// -- rad --
 
-		$view = $this->input->getCmd('view', $jnrad_default_view);
+		$defautlView = $jnrad_vars["default_view"];
+
+		$view = $this->input->getCmd('view', $defautlView);
 		$this->input->set('view', $view);
 
 		parent::display($cachable, $urlparams);
@@ -32,3 +37,4 @@ class JnRadController extends JControllerLegacy
 		return $this;
 	}
 }
+

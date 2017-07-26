@@ -10,9 +10,13 @@ defined('_JEXEC') or die;
 /**
  * Employee controller class.
  */
-class JntrackerControllerEmployee extends JnRadItemController
+class JntrackerControllerEmployee extends JnRadItemAdminController
 {
-	protected $jnrad_asset_singular = 'Employee';
+	public $jnrad = array(
+		"jnrad_asset" => "Employee",
+		"jnrad_asset_singular" => "Employee",
+		"jnrad_asset_plural" => "Employees",
+	);
 }
 
 

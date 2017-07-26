@@ -7,13 +7,10 @@
 // No direct access
 defined('_JEXEC') or die;
 
-
 /**
- * Item controller admin class.
+ * Items view base class
  */
-class JnRadItemAdminController extends JnRadItemBaseController
+class JnRadItemBaseView extends JViewLegacy
 {
-	//
+	public $jnrad = array();
 }
-
-

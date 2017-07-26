@@ -10,21 +10,24 @@ defined("_JEXEC") or die;
 use Joomla\Utilities\ArrayHelper;
 
 /**
- * Item Table class
+ * Item table base class
  */
-class JnRadItemTable extends JTable
+class JnRadItemBaseTable extends JTable
 {
+	public $jnrad = array();
+
 
 	/**
 	 * Constructor
 	 */
 	public function __construct(&$db)
 	{
-		$helper = jnRadHelper;
-		extract($helper::radVars($this->jnrad_asset_singular));
+		extract(JnRadHelper::prepare($this->jnrad));
 		// --- rad ---
 
-		parent::__construct("#__{$jnrad_nameL}_{$jnrad_assetL}s", "id", $db);
+		$dbTableName = $jnrad_vars["db_table_name"];
+
+		parent::__construct("#__{$jnrad_nameL}_{$dbTableName}", "id", $db);
 	}
 
 
@@ -33,9 +36,10 @@ class JnRadItemTable extends JTable
 	 */
 	public function bind($array, $ignore = "")
 	{
-		$helper = jnRadHelper;
-		extract($helper::radVars($this->jnrad_asset_singular));
+		extract(JnRadHelper::prepare($this->jnrad));
 		// --- rad ---
+
+		$dbTableName = $jnrad_vars["db_table_name"];
 
 		if ($array["id"] == 0)
 		{
@@ -61,13 +65,13 @@ class JnRadItemTable extends JTable
 			$array["metadata"] = (string) $registry;
 		}
 
-		if (!JFactory::getUser()->authorise("core.admin", "$jnrad_nameL.$jnrad_assetL" . $array["id"]))
+		if (!JFactory::getUser()->authorise("core.admin", "$jnrad_nameL.$jnrad_asset_singularL" . $array["id"]))
 		{
 			$actions = JAccess::getActionsFromFile(
 				JPATH_ADMINISTRATOR . "/components/com_$jnrad_nameL/access.xml",
-				"/access/section[@name=\"$jnrad_assetL\"]/"
+				"/access/section[@name=\"$jnrad_asset_singularL\"]/"
 			);
-			$default_actions = JAccess::getAssetRules("$jnrad_nameL.$jnrad_assetL" . $array["id"])->getData();
+			$default_actions = JAccess::getAssetRules("$jnrad_nameL.$jnrad_asset_singularL" . $array["id"])->getData();
 			$array_jaccess   = array();
 
 			foreach ($actions as $action)

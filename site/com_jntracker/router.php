@@ -10,7 +10,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
-require_once JPATH_LIBRARIES."/jnrad/site/loader.php";
+// require_once JPATH_LIBRARIES."/jnrad/site/loader.php";
 JLoader::registerPrefix('Jntracker', JPATH_SITE . '/components/com_jntracker/');
 
 /**

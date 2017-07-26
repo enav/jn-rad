@@ -7,12 +7,10 @@
 // No direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.view');
-
 /**
- * View to edit
+ * Items view admin class
  */
-class JnRadItemView extends JViewLegacy
+class JnRadItemAdminView extends JnRadItemBaseView
 {
 	protected $state;
 
@@ -26,6 +24,9 @@ class JnRadItemView extends JViewLegacy
 	 */
 	public function display($tpl = null)
 	{
+		extract(JnRadHelper::prepare($this->jnrad));
+		// --- rad ---
+
 		$model = $this->getModel();
 		$this->state = $model->getState();
 		$this->item  = $model->getItem();
@@ -37,19 +38,8 @@ class JnRadItemView extends JViewLegacy
 			throw new Exception(implode("\n", $errors));
 		}
 
-		$this->addToolbar();
+		$jnrad_helper::addToolbar($this);
+
 		parent::display($tpl);
-	}
-
-
-	/**
-	 * Add the page title and toolbar.
-	 */
-	protected function addToolbar()
-	{
-		$helper = JnRadHelper;
-		// --- rad ---
-
-		$helper::addToolbar($this->jnrad_asset_singular);
 	}
 }

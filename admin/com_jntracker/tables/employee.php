@@ -7,12 +7,18 @@
 // No direct access
 defined("_JEXEC") or die;
 
-use Joomla\Utilities\ArrayHelper;
 
 /**
  * Employee table class
  */
-class JntrackerTableEmployee extends JnRadItemTable
+class JntrackerTableEmployee extends JnRadItemBaseTable
 {
-	protected $jnrad_asset_singular = 'Employee';
+	public $jnrad = array(
+		"jnrad_asset" => "Employee",
+		"jnrad_asset_singular" => "Employee",
+		"jnrad_asset_plural" => "Employees",
+		"jnrad_vars" => array(
+			"db_table_name" => "employees",
+		),
+	);
 }

@@ -8,9 +8,9 @@
 defined("_JEXEC") or die;
 
 /**
- * Items view class.
+ * Items view admin class.
  */
-class JnRadItemsView extends JViewLegacy
+class JnRadItemsAdminView extends JnRadItemsBaseView
 {
 	protected $items;
 
@@ -18,13 +18,15 @@ class JnRadItemsView extends JViewLegacy
 
 	protected $state;
 
+	protected $params;
+
+
 	/**
 	 * Display the view
 	 */
 	public function display($tpl = null)
 	{
-		$helper = JnRadHelper;
-		extract($helper::radVars($this->jnrad_asset_singular));
+		extract(JnRadHelper::prepare($this->jnrad));
 		// --- rad ---
 
 		$model = $this->getModel();
@@ -40,25 +42,10 @@ class JnRadItemsView extends JViewLegacy
 			throw new Exception(implode("\n", $errors));
 		}
 
-		$this->addToolbar();
+		$jnrad_helper::addToolbar($this);
 
-		// Set sidebar action - New in 3.0
-		JHtmlSidebar::setAction("index.php?option=com_$jnrad_nameL&view=$jnrad_assetL");
-
-		$helper::addSidebar($this);
+		$jnrad_helper::addSidebar($this);
 
 		parent::display($tpl);
 	}
-
-	/**
-	 * Add the page title and toolbar.
-	 */
-	protected function addToolbar()
-	{
-		$helper = JnRadHelper;
-		// --- rad ---
-
-		$helper::addToolbar($this->jnrad_asset_singular."s");
-	}
-
 }

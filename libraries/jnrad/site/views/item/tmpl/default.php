@@ -7,9 +7,8 @@
 // No direct access
 defined('_JEXEC') or die;
 
-JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
-$helper = JnRadHelper;
-extract($helper::radVars($this->jnrad_asset_singular));
+JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
+extract(JnRadHelper::prepare($this->jnrad));
 // --- rad ---
 ?>
 <ul>

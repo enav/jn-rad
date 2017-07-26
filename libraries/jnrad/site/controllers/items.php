@@ -7,34 +7,13 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.controlleradmin');
 
 /**
- * Items controller class.
+ * Items controller site class.
  */
-class JnRadItemsController extends JControllerAdmin
+class JnRadItemsSiteController extends JnRadItemsBaseController
 {
-	/**
-	 * Proxy for getModel.
-	 */
-	public function getModel($name = '', $prefix = '', $config = array())
-	{
-		$helper = JnRadHelper;
-		extract($helper::radVars($this->jnrad_asset_singular));
-		// --- rad ---
-
-		if(empty($name)){
-			$name = $jnrad_assetL;
-		}
-		if(empty($prefix)){
-			$prefix = $jnrad_name."Model";
-		}
-		if(empty($config)){
-			$config = array('ignore_request' => true);
-		}
-		$model = parent::getModel($name, $prefix, $config);
-		return $model;
-	}
+	//
 }
 
 

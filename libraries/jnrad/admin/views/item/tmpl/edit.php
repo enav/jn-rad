@@ -8,10 +8,10 @@
 defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
-$helper = JnRadHelper;
-extract($helper::radVars($this->jnrad_asset_singular));
-$jnrad_fields = $jnrad_vars["$jnrad_assetL.view.fields"];
+extract(JnRadHelper::prepare($this->jnrad));
 // --- rad ---
+
+$fields = $jnrad_vars["fields"];
 
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
@@ -53,8 +53,8 @@ JHtml::_('behavior.tabstate');
 	<?php echo JHtml::_('bootstrap.startTabSet', 'myTab', array('active' => 'basic')); ?>
 		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'basic', JText::_("COM_{$jnrad_nameU}_TAB_BASIC", true)); ?>
 			<!-- custom fields -->
-			<?php foreach ($jnrad_fields as $jnrad_field) : ?>
-				<?php echo $this->form->renderField($jnrad_field); ?>
+			<?php foreach ($fields as $field) : ?>
+				<?php echo $this->form->renderField($field); ?>
 			<?php endforeach; ?>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
 		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'system', JText::_("COM_{$jnrad_nameU}_TAB_SYSTEM", true)); ?>

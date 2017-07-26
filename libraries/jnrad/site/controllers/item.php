@@ -7,24 +7,13 @@
 // No direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.controllerform');
 
 /**
- * Item controller class.
+ * Item controller site class.
  */
-class JnRadItemController extends JControllerForm
+class JnRadItemSiteController extends JnRadItemBaseController
 {
-
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$helper = JnRadHelper;
-		extract($helper::radVars($this->jnrad_asset_singular));
-		// --- rad ---
-
-		$this->view_list = $jnrad_assetL."s";
-		parent::__construct();
-	}
+	//
 }
+
+

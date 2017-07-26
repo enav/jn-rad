@@ -8,10 +8,10 @@
 defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/');
-$helper = JnRadHelper;
-extract($helper::radVars($this->jnrad_asset_singular));
-$jnrad_columns = $jnrad_vars[$jnrad_assetL."s.view.columns"];
+extract(JnRadHelper::prepare($this->jnrad));
 // --- rad ---
+
+$columns = $jnrad_vars["grid"]["columns"];
 
 JHtml::_('bootstrap.tooltip');
 JHtml::_('behavior.multiselect');
@@ -25,13 +25,11 @@ $saveOrder = $listOrder == 'a.ordering';
 
 if ($saveOrder)
 {
-	$saveOrderingUrl = "index.php?option=com_$jnrad_nameL&task=".$jnrad_assetL."s.saveOrderAjax&tmpl=component";
-	JHtml::_('sortablelist.sortable', "{$jnrad_assetL}List", "adminForm", strtolower($listDirn), $saveOrderingUrl);
+	$saveOrderingUrl = "index.php?option=com_$jnrad_nameL&task=$jnrad_asset_pluralL.saveOrderAjax&tmpl=component";
+	JHtml::_('sortablelist.sortable', "{$jnrad_asset_singularL}List", "adminForm", strtolower($listDirn), $saveOrderingUrl);
 }
 ?>
-
-
-<form action="<?php echo JRoute::_("index.php?option=com_$jnrad_nameL&view=".$jnrad_assetL."s"); ?>" method="post"
+<form action="<?php echo JRoute::_("index.php?option=com_$jnrad_nameL&view=$jnrad_asset_pluralL"); ?>" method="post"
 	name="adminForm" id="adminForm">
 	<!-- sidebar -->
 	<?php if (!empty($this->sidebar)): ?>
@@ -51,30 +49,30 @@ if ($saveOrder)
 				<?php echo JText::_('JGLOBAL_NO_MATCHING_RESULTS'); ?>
 			</div>
 		<?php else : ?>
-			<table class="table table-striped" id="<?php echo "{$jnrad_assetL}List"; ?>">
+			<table class="table table-striped" id="<?php echo "{$jnrad_asset_singularL}List"; ?>">
 				<!-- grid head -->
 				<thead>
 					<tr>
-						<?php foreach($jnrad_columns as $jnrad_column) : ?>
+						<?php foreach($columns as $column) : ?>
 							<?php
-							$jnrad_field = $jnrad_column['field'];
-							$jnrad_fieldU = strtoupper($jnrad_field);
-							if(!isset($jnrad_column['heading'])) $jnrad_column['heading'] = $jnrad_field;
-							$jnrad_heading = $jnrad_column['heading'];
-							$jnrad_headingU = strtoupper($jnrad_heading);
-							$jnrad_attribs = $jnrad_column['th.attribs'];
+							$field = $column['field'];
+							$fieldU = strtoupper($field);
+							if(!isset($column['header'])) $column['header'] = $field;
+							$header = $column['header'];
+							$headerU = strtoupper($header);
+							$attribs = $column['th.attribs'];
 							?>
-							<!-- col: <?php echo $jnrad_heading; ?> -->
-							<th <?php echo $jnrad_attribs; ?>>
-								<?php if($jnrad_field == 'ordering') : ?>
+							<!-- col: <?php echo $header; ?> -->
+							<th <?php echo $attribs; ?>>
+								<?php if($field == 'ordering') : ?>
 									<?php //ordering ?>
-									<?php echo JHtml::_('searchtools.sort', '', 'a.ordering', $listDirn, $listOrder, null, 'asc', 'JGRID_HEADING_ORDERING', 'icon-menu-2'); ?>
-								<?php elseif($jnrad_field == 'checkbox') : ?>
+									<?php echo JHtml::_('searchtools.sort', '', 'a.ordering', $listDirn, $listOrder, null, 'asc', 'JGRID_header_ORDERING', 'icon-menu-2'); ?>
+								<?php elseif($field == 'checkbox') : ?>
 									<?php //checkbox ?>
 									<?php echo JHtml::_('grid.checkall'); ?>
 								<?php else : ?>
 									<?php //custom ?>
-									<?php echo JHtml::_('searchtools.sort', "COM_{$jnrad_nameU}_COLUMN_{$jnrad_headingU}", "a.{$jnrad_field}", $listDirn, $listOrder); ?>
+									<?php echo JHtml::_('searchtools.sort', "COM_{$jnrad_nameU}_COLUMN_{$headerU}", "a.{$field}", $listDirn, $listOrder); ?>
 								<?php endif; ?>
 							</th>
 						<?php endforeach; ?>
@@ -92,24 +90,24 @@ if ($saveOrder)
 						$canChange  = $user->authorise('core.edit.state', "com_$jnrad_nameL") && $canCheckin;
 						?>
 						<tr sortable-group-id="1">
-							<?php foreach($jnrad_columns as $jnrad_column) : ?>
+							<?php foreach($columns as $column) : ?>
 								<?php
-								$jnrad_field = $jnrad_column['field'];
-								$jnrad_fieldU = strtoupper($jnrad_field);
-								if(!isset($jnrad_column['heading'])) $jnrad_column['heading'] = $jnrad_field;
-								$jnrad_heading = $jnrad_column['heading'];
-								$jnrad_headingU = strtoupper($jnrad_heading);
-								$jnrad_attribs = $jnrad_column['td.attribs'];
-								$jnrad_translateRows = $jnrad_column['translateRows'];
-								$jnrad_translateRowsPrefix = $jnrad_column['translateRowsPrefix'];
-								$jnrad_add_checkout = $jnrad_column['add_checkout'];
-								$jnrad_add_edit_link = $jnrad_column['add_edit_link'];
-								$jnrad_translate = $jnrad_column['td.translate'];
-								$jnrad_translatePrefix = $jnrad_column['td.translatePrefix'];
+								$field = $column['field'];
+								$fieldU = strtoupper($field);
+								if(!isset($column['header'])) $column['header'] = $field;
+								$header = $column['header'];
+								$headerU = strtoupper($header);
+								$attribs = $column['td.attribs'];
+								$translateRows = $column['translateRows'];
+								$translateRowsPrefix = $column['translateRowsPrefix'];
+								$add_checkout = $column['add_checkout'];
+								$add_edit_link = $column['add_edit_link'];
+								$translate = $column['td.translate'];
+								$translatePrefix = $column['td.translatePrefix'];
 								?>
-								<!-- col: <?php echo $jnrad_heading; ?> -->
-								<td <?php echo $jnrad_attribs; ?>>
-									<?php if($jnrad_field == 'ordering') : ?>
+								<!-- col: <?php echo $header; ?> -->
+								<td <?php echo $attribs; ?>>
+									<?php if($field == 'ordering') : ?>
 										<?php //ordering ?>
 										<?php
 										$iconClass = '';
@@ -128,47 +126,47 @@ if ($saveOrder)
 										<?php if ($canChange && $saveOrder) : ?>
 											<input type="text" style="display:none" name="order[]" size="5" value="<?php echo $item->ordering; ?>" class="width-20 text-area-order " />
 										<?php endif; ?>
-									<?php elseif($jnrad_field == 'checkbox') : ?>
+									<?php elseif($field == 'checkbox') : ?>
 										<?php //checkedout ?>
 										<?php echo JHtml::_('grid.id', $i, $item->id); ?>
-									<?php elseif($jnrad_field == 'enable') : ?>
+									<?php elseif($field == 'enable') : ?>
 										<?php //enable ?>
 										<?php
-										$jnrad_field_text = $this->escape($item->{$jnrad_field});
-										$jnrad_field_text = JText::_("COM_{$jnrad_nameU}_VALUEMAP_ENABLE_".$jnrad_field_text);
-										if($item->{$jnrad_field} == 1)
+										$fieldText = $this->escape($item->{$field});
+										$fieldText = JText::_("COM_{$jnrad_nameU}_VALUEMAP_ENABLE_".$fieldText);
+										if($item->{$field} == 1)
 										{
-											echo "<span class=\"badge badge-success\">$jnrad_field_text</span>";
+											echo "<span class=\"badge badge-success\">$fieldText</span>";
 										}
-										else if($item->{$jnrad_field} == 0)
+										else if($item->{$field} == 0)
 										{
-											echo "<span class=\"badge badge-important\">$jnrad_field_text</span>";
+											echo "<span class=\"badge badge-important\">$fieldText</span>";
 										}
 										?>
 									<?php else : ?>
 										<?php //custom ?>
-										<?php if ($jnrad_add_checkout && isset($item->checked_out) && $item->checked_out && ($canEdit || $canChange)) : ?>
+										<?php if ($add_checkout && isset($item->checked_out) && $item->checked_out && ($canEdit || $canChange)) : ?>
 											<?php //add checkout ?>
-											<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, "{$jnrad_assetL}s.", $canCheckin); ?>
+											<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, "$jnrad_asset_pluralL.", $canCheckin); ?>
 										<?php endif; ?>
 										<?php
-										$jnrad_field_text = $this->escape($item->{$jnrad_field});
-										if($jnrad_translate){
+										$fieldText = $this->escape($item->{$field});
+										if($translate){
 											//translate
-											$jnrad_field_text = strtoupper("COM_{$jnrad_nameU}_{$jnrad_translatePrefix}{$jnrad_field_text}");
-											$jnrad_field_text = JText::_($jnrad_field_text);
+											$fieldText = strtoupper("COM_{$jnrad_nameU}_{$translatePrefix}{$fieldText}");
+											$fieldText = JText::_($fieldText);
 										}
 										?>
-										<?php if ($jnrad_add_edit_link && ($canEdit || $canEditOwn)) : ?>
+										<?php if ($add_edit_link && ($canEdit || $canEditOwn)) : ?>
 											<?php //add edit link ?>
-											<a href="<?php echo JRoute::_("index.php?option=com_$jnrad_nameL&task=".$jnrad_assetL.".edit&id=".(int) $item->id); ?>"
+											<a href="<?php echo JRoute::_("index.php?option=com_$jnrad_nameL&task=$jnrad_asset_singularL.edit&id=".(int) $item->id); ?>"
 												title="<?php echo JText::_('JACTION_EDIT'); ?>"
 											>
-												<?php echo $jnrad_field_text; ?>
+												<?php echo $fieldText; ?>
 											</a>
 										<?php else : ?>
 											<?php //plain text ?>
-											<?php echo $jnrad_field_text; ?>
+											<?php echo $fieldText; ?>
 										<?php endif; ?>
 									<?php endif; ?>
 								</td>
@@ -179,7 +177,7 @@ if ($saveOrder)
 				<!-- grid footer -->
 				<tfoot>
 					<tr>
-						<td colspan="<?php echo count($jnrad_columns); ?>">
+						<td colspan="<?php echo count($columns); ?>">
 							<?php echo $this->pagination->getListFooter(); ?>
 						</td>
 					</tr>

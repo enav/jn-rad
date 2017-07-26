@@ -8,9 +8,7 @@
 defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/');
-$helper = JnRadHelper;
-extract($helper::radVars($this->jnrad_asset_singular));
-$jnrad_columns = $jnrad_vars[$jnrad_assetL."s.view.columns"];
+extract(JnRadHelper::prepare($this->jnrad));
 // --- rad ---
 ?>
 <ul>
@@ -18,8 +16,8 @@ $jnrad_columns = $jnrad_vars[$jnrad_assetL."s.view.columns"];
 		<li>
 			<?php
 			$id = (int) $item->id;
-			$link = JRoute::_("index.php?option=com_$jnrad_nameL&view=$jnrad_assetL&id=$id");
-			$editLink = JRoute::_("index.php?option=com_$jnrad_nameL&view=$jnrad_assetL&id=$id&layout=edit");
+			$link = JRoute::_("index.php?option=com_$jnrad_nameL&view=$jnrad_asset_singularL&id=$id");
+			$editLink = JRoute::_("index.php?option=com_$jnrad_nameL&view=$jnrad_asset_singularL&id=$id&layout=edit");
 			?>
 			<a href="<?php echo $link; ?>"><?php echo $item->name; ?></a>
 			-
@@ -28,5 +26,4 @@ $jnrad_columns = $jnrad_vars[$jnrad_assetL."s.view.columns"];
 	<?php endforeach; ?>
 </ul>
 <?php echo $this->pagination->getListFooter(); ?>
-
 

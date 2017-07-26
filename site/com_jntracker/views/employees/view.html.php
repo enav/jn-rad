@@ -4,15 +4,20 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
+
 // No direct access
 defined("_JEXEC") or die;
+
 
 /**
  * Employees view class.
  */
-class JnTrackerViewEmployees extends JnRadItemsView
+class JnTrackerViewEmployees extends JnRadItemsSiteView
 {
-	protected $jnrad_asset_singular = 'Employee';
+	public $jnrad = array(
+		"jnrad_asset" => "Employees",
+		"jnrad_asset_singular" => "Employee",
+		"jnrad_asset_plural" => "Employees",
+	);
 }
-
 

@@ -9,25 +9,24 @@ defined('_JEXEC') or die;
 
 
 /**
- * Landing page view class.
+ * Item controller base class.
  */
-class JnRadLandingAdminView extends JViewLegacy
+class JnRadItemBaseController extends JControllerForm
 {
 	public $jnrad = array();
 
 
 	/**
-	 * Display the view
+	 * Constructor
 	 */
-	public function display($tpl = null)
+	public function __construct()
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
 		// --- rad ---
 
-		$jnrad_helper::addToolbar($this);
-
-		$jnrad_helper::addSidebar($this);
-
-		parent::display($tpl);
+		$this->view_list = $jnrad_asset_plural;
+		parent::__construct();
 	}
 }
+
+

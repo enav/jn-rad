@@ -7,12 +7,22 @@
 // No direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.view');
 
 /**
  * landing view class.
  */
-class JnTrackerViewLanding extends JnRadLandingView
+class JnTrackerViewLanding extends JnRadLandingAdminView
 {
-	//
+	public $jnrad = array(
+		"jnrad_asset" => "Landing",
+		"jnrad_vars" => array(
+			"toolbar" => array(
+				"icon" => "cube",
+				"buttons" => array(
+					"admin",
+				),
+			),
+		),
+	);
 }
+

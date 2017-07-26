@@ -7,12 +7,10 @@
 // No direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.view');
-
 /**
- * View to edit
+ * Items view site class
  */
-class JnRadItemView extends JViewLegacy
+class JnRadItemSiteView extends JnRadItemBaseView
 {
 	protected $state;
 
@@ -26,6 +24,9 @@ class JnRadItemView extends JViewLegacy
 	 */
 	public function display($tpl = null)
 	{
+		extract(JnRadHelper::prepare($this->jnrad));
+		// --- rad ---
+
 		$model = $this->getModel();
 		$this->state = $model->getState();
 		$this->item  = $model->getItem();
@@ -39,5 +40,4 @@ class JnRadItemView extends JViewLegacy
 
 		parent::display($tpl);
 	}
-
 }

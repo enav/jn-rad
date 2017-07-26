@@ -10,7 +10,7 @@ defined('_JEXEC') or die;
 /**
  * JnTrackerHelper class.
  */
-class JnTrackerHelper extends JnRadHelper
+class JnTrackerHelper
 {
 	//
 }

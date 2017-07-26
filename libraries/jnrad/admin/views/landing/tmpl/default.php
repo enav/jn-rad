@@ -8,9 +8,8 @@
 defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/');
-$helper = JnRadHelper;
-extract($helper::radVars('Landing'));
-// -- rad --
+extract(JnRadHelper::prepare($this->jnrad));
+// --- rad ---
 ?>
 <div id="j-sidebar-container" class="span2">
 	<?php echo $this->sidebar; ?>

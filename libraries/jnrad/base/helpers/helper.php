@@ -8,10 +8,89 @@
 defined('_JEXEC') or die;
 
 /**
- * JnRadHelper class.
+ * JnRad Helper class.
  */
 class JnRadHelper
 {
+	/**
+	 * Generates an array with case variations of a name
+	 *
+	 * @param   string  $name    Name in camel case format.
+	 * @param   string  $prefix  Name variation prefix.
+	 *
+	 * @return    Array
+	 */
+	public static function nameVariations ($name, $prefix)
+	{
+		$names[$prefix] = $name;
+		$names[$prefix.'L'] = strtolower($name);
+		$names[$prefix.'U'] = strtoupper($name);
+		return $names;
+	}
+
+
+	/**
+	 * Prepare jnrad array for posterior extraction
+	 */
+	public static function prepare($jnrad = array())
+	{
+		// rename this jnrad array to avoid conflic if a jnrad file is loaded
+		// TODO: use something more elegant in the future
+		$jnrad2 = $jnrad;
+		$jnrad = null;
+
+		// load jnrad file if exists
+		$file = JPATH_COMPONENT.'/jnrad.php';
+		if(file_exists($file))
+		{
+			include $file;
+		}
+
+		// add jnrad vars arrays
+		$jnrad["jnrad_vars"] = (array)$jnrad["jnrad_vars"];
+		$jnrad2["jnrad_vars"] = (array)$jnrad2["jnrad_vars"];
+		$jnrad = array_merge_recursive($jnrad, $jnrad2);
+
+		// extension name variations
+		if(empty($jnrad["jnrad_name"]))
+		{
+			$name = JFactory::getApplication()->input->get('option');
+			$name = strtolower($name);
+			$name = str_replace("com_", "", $name);
+			$name = ucfirst($name);
+			$jnrad["jnrad_name"] = $name;
+		}
+		$jnrad["jnrad_nameL"] = strtolower($jnrad["jnrad_name"]);
+		$jnrad["jnrad_nameU"] = strtoupper($jnrad["jnrad_name"]);
+
+		// asset name variants
+		if(!empty($jnrad["jnrad_asset"]))
+		{
+			$jnrad["jnrad_assetL"] = strtolower($jnrad["jnrad_asset"]);
+			$jnrad["jnrad_assetU"] = strtoupper($jnrad["jnrad_asset"]);
+		}
+
+		// asset singular name variants
+		if(!empty($jnrad["jnrad_asset_singular"]))
+		{
+			$jnrad["jnrad_asset_singularL"] = strtolower($jnrad["jnrad_asset_singular"]);
+			$jnrad["jnrad_asset_singularU"] = strtoupper($jnrad["jnrad_asset_singular"]);
+		}
+
+		// asset plural name variants
+		if(!empty($jnrad["jnrad_asset_plural"]))
+		{
+			$jnrad["jnrad_asset_pluralL"] = strtolower($jnrad["jnrad_asset_plural"]);
+			$jnrad["jnrad_asset_pluralU"] = strtoupper($jnrad["jnrad_asset_plural"]);
+		}
+
+		// helper reference, helps to write generic code
+		$jnrad["jnrad_helper"] = JnRadHelper;
+
+		return $jnrad;
+	}
+
+
 	/**
 	 * Adds the sidebar.
 	 *
@@ -21,8 +100,10 @@ class JnRadHelper
 	 */
 	public static function addSidebar(&$view)
 	{
-		extract(self::radVars());
-		$items = $jnrad_vars['sidebar.items'];
+		extract(self::prepare($view->jnrad));
+		// --- rad ---
+
+		$items = $jnrad_vars["sidebar"]["items"];
 
 		foreach ($items as $item)
 		{
@@ -31,7 +112,7 @@ class JnRadHelper
 				JText::_("COM_{$jnrad_nameU}_SIDEBAR_ITEM_$itemU"),
 				"index.php?option=com_$jnrad_nameL&view=$item",
 				$item == $view->getName()
-			);
+				);
 		}
 
 		$view->sidebar = JHtmlSidebar::render();
@@ -39,12 +120,12 @@ class JnRadHelper
 
 	/**
 	 * Gets a list of the actions that can be performed.
-	 *
-	 * @return    JObject
 	 */
-	public static function getActions()
+	public static function getActions($view)
 	{
-		extract(self::radVars());
+		extract(self::prepare($view->jnrad));
+		// --- rad ---
+
 		$user    = JFactory::getUser();
 		$result  = new JObject;
 		$xml     = JFactory::getXml(JPATH_COMPONENT."/access.xml", true);
@@ -58,76 +139,20 @@ class JnRadHelper
 		return $result;
 	}
 
-
-	/**
-	 * Generates an array with case variations of a name
-	 *
-	 * @param   string  $name    Name in camel case format.
-	 * @param   string  $prefix  Name variation prefix.
-	 *
-	 * @return    Array
-	 */
-	public static function nameVariations ($name, $prefix)
-	{
-		$vars[$prefix] = $name;
-		$vars[$prefix.'L'] = strtolower($name);
-		$vars[$prefix.'U'] = strtoupper($name);
-
-		return $vars;
-	}
-
-	/**
-	 * Load and return the array of RAD vars
-	 *
-	 * @param   string  $jnrad_asset [optional]  Asset name in camel case format.
-	 *
-	 * @return    Array
-	 */
-	public static function radVars($jnrad_asset = "")
-	{
-		include JPATH_COMPONENT.'/jnrad_vars.php';
-
-		// asset name variations
-		if($jnrad_asset != "")
-		{
-			$jnrad_vars = array_merge($jnrad_vars, self::nameVariations($jnrad_asset , 'jnrad_asset'));
-		}
-
-		return $jnrad_vars;
-	}
-
-	/**
-	 * Merge arrays and remove duplicates
-	 *
-	 * @param   string  $jnrad_asset [optional]  Asset name in camel case format.
-	 *
-	 * @return    Array
-	 */
-	public static function arrayMergeUnique(...$arrays_)
-	{
-		$myArray = array();
-		foreach ($arrays_ as $array_)
-		{
-			if(!isset($array_)) continue;
-			$myArray = array_merge($myArray, $array_);
-		}
-		$myArray = array_unique($myArray);
-		return $myArray;
-	}
-
-
 	/**
 	 * Add the page title and toolbar.
 	 *
 	 * @return void
 	 */
-	public static function addToolbar($assetName, $view = NULL)
+	public static function addToolbar($view)
 	{
-		extract(self::radVars($assetName));
-		$jnrad_toolbar_buttons = $jnrad_vars["$jnrad_assetL.view.toolbar.buttons"];
+		extract(self::prepare($view->jnrad));
 		// --- rad ---
 
-		$canDo = self::getActions($jnrad_assetL);
+		$buttons = $jnrad_vars["toolbar"]["buttons"];
+		$icon = $jnrad_vars["toolbar"]["icon"];
+
+		$canDo = self::getActions($view);
 
 		if(!$view)
 		{
@@ -143,10 +168,10 @@ class JnRadHelper
 			}
 		}
 
-		JToolBarHelper::title(JText::_("COM_{$jnrad_nameU}_PAGETITLE_$jnrad_assetU"), $jnrad_vars["$jnrad_assetL.view.toolbar.icon"]);
+		JToolBarHelper::title(JText::_("COM_{$jnrad_nameU}_PAGETITLE_{$jnrad_assetU}"), $icon);
 
-		foreach ($jnrad_toolbar_buttons as $jnrad_toolbar_button){
-			switch ($jnrad_toolbar_button){
+		foreach ($buttons as $button){
+			switch ($button){
 				case 'divider':
 					JToolBarHelper::divider();
 					break;
@@ -212,8 +237,10 @@ class JnRadHelper
 		}
 
 
-		// TODO: no idea what is this for ?
+		// TODO: i have no idea what is this for :(
 		// Set sidebar action - New in 3.0
 		JHtmlSidebar::setAction("index.php?option=com_$jnrad_nameL&view=$jnrad_assetL");
 	}
 }
+
+
