@@ -4,7 +4,6 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-
 // No direct access
 defined('_JEXEC') or die;
 
@@ -20,19 +19,6 @@ class JnTrackerModelEmployees extends JnRadItemsAdminModel
 		"jnrad_asset_plural" => "Employees",
 		"jnrad_vars" => array(
 			"db_table_name" => "employees",
-			"whitelist_fields" => array(
-				"search",
-				"enable",
-				"ordering",
-				"name",
-				"type",
-				"id",
-			),
-			"populate_state_fields" => array(
-				"search",
-				"enable",
-				"type",
-			),
 			"ordering_fields" => array(
 				"enable",
 				"name",
@@ -45,10 +31,6 @@ class JnTrackerModelEmployees extends JnRadItemsAdminModel
 			),
 			"search_fields" => array(
 				"name",
-			),
-			"filter_fields" => array(
-				"enable",
-				"type",
 			),
 		)
 	);

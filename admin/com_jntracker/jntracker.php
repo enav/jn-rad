@@ -7,4 +7,5 @@
 // No direct access
 defined('_JEXEC') or die;
 
+
 require_once JPATH_LIBRARIES."/jnrad/admin/entrypoint.php";

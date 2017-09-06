@@ -7,6 +7,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
+
 /**
  * Items model admin class.
  *

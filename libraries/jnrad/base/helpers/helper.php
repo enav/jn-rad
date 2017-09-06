@@ -241,6 +241,25 @@ class JnRadHelper
 		// Set sidebar action - New in 3.0
 		JHtmlSidebar::setAction("index.php?option=com_$jnrad_nameL&view=$jnrad_assetL");
 	}
+
+
+	/**
+	 * Merge arrays and remove duplicates
+	 *
+	 * @param   arrays  Arrays.
+	 *
+	 * @return    Array
+	 */
+	public static function arrayMerge(...$arrays){
+		$newArray = array();
+
+		foreach ($arrays as $array){
+			if(!isset($array)) continue;
+			$newArray = array_merge($newArray, $array);
+		}
+
+		return array_unique($newArray);
+	}
 }
 
 

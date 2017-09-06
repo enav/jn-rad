@@ -37,6 +37,7 @@ if ($saveOrder)
 			<?php echo $this->sidebar; ?>
 		</div>
 	<?php endif; ?>
+
 	<!-- main container -->
 	<div id="j-main-container" <?php if (!empty($this->sidebar)) echo 'class="span10"' ?>>
 

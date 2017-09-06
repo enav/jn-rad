@@ -32,7 +32,6 @@
 			<option value="developer">COM_JNTRACKER_OPTION_DEVELOPER</option>
 			<option value="manager">COM_JNTRACKER_OPTION_MANAGER</option>
 		</field>
-		
 	</fields>
 	
 	<fields name="list">

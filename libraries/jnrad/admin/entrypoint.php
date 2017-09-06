@@ -27,8 +27,6 @@ require_once JPATH_LIBRARIES."/jnrad/admin/controllers/controller.php";
 require_once JPATH_LIBRARIES."/jnrad/admin/controllers/items.php";
 require_once JPATH_LIBRARIES."/jnrad/admin/controllers/item.php";
 
-require_once JPATH_LIBRARIES."/jnrad/admin/views/landing/view.html.php";
-
 extract(JnRadHelper::prepare());
 
 JLoader::register($jnrad_nameL.'Helper', JPATH_COMPONENT."/helpers/$jnrad_nameL.php");

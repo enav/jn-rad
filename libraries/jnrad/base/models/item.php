@@ -28,6 +28,7 @@ class JnRadItemBaseModel extends JModelAdmin
 
 		if(empty($type)) $type = $jnrad_vars["j_table_name"];
 		if(empty($prefix)) $prefix = "{$jnrad_name}Table";
+
 		return JTable::getInstance($type, $prefix, $config);
 	}
 

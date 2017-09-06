@@ -7,6 +7,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
+
 /**
  * Items model base class.
  */
@@ -25,9 +26,40 @@ class JnRadItemsBaseModel extends JModelList
 	*/
 	public function __construct($config = array())
 	{
+		// feed jnrad_vars with the form content
+		$form = $this->getFilterForm(null, false);
+
+		// list and merge filter fields
+		$fields = $form->getGroup("filter");
+		foreach ($fields as $field){
+			$array1[] = $field->getAttribute('name');
+		}
+		$array2 = $this->jnrad["jnrad_vars"]["filter_fields"];
+		$array2 = JnRadHelper::arrayMerge($array1, $array2);
+		$this->jnrad["jnrad_vars"]["filter_fields"] = $array2;
+
+		// list and merge populate state fields
+		$array1 = $this->jnrad["jnrad_vars"]["populate_state_fields"];
+		$array2 = $this->jnrad["jnrad_vars"]["filter_fields"];
+		$array2 = JnRadHelper::arrayMerge($array1, $array2);
+		$this->jnrad["jnrad_vars"]["populate_state_fields"] = $array2;
+
+		// list and merge whitelist fields
+		$array1 = $this->jnrad["jnrad_vars"]["whitelist_fields"];
+		$array2 = $this->jnrad["jnrad_vars"]["filter_fields"];
+		$array3 = $this->jnrad["jnrad_vars"]["populate_state_fields"];
+		$array4 = $this->jnrad["jnrad_vars"]["ordering_fields"];
+		$array4 = JnRadHelper::arrayMerge($array1, $array2, $array3, $array4);
+		$this->jnrad["jnrad_vars"]["whitelist_fields"] = $array4;
+
+		// free memory
+		unset($array1, $array2, $array3, $array4);
+
+		// init jnrad
 		extract(JnRadHelper::prepare($this->jnrad));
 		// --- rad ---
 
+		// pass whitelist fields to parent constructor
 		$fields = $jnrad_vars["whitelist_fields"];
 
 		foreach($fields as $field)
@@ -202,5 +234,13 @@ class JnRadItemsBaseModel extends JModelList
 
 		return $query;
 	}
-
 }
+
+
+
+
+
+
+
+
+
