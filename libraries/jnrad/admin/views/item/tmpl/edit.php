@@ -52,22 +52,25 @@ JHtml::_('behavior.tabstate');
 	>
 	<?php echo JHtml::_('bootstrap.startTabSet', 'myTab', array('active' => 'basic')); ?>
 		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'basic', JText::_("COM_{$jnrad_nameU}_TAB_BASIC", true)); ?>
-			<!-- custom fields -->
-			<?php foreach ($fields as $field) : ?>
-				<?php echo $this->form->renderField($field); ?>
-			<?php endforeach; ?>
-		<?php echo JHtml::_('bootstrap.endTab'); ?>
-		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'system', JText::_("COM_{$jnrad_nameU}_TAB_SYSTEM", true)); ?>
-			<!-- system fields -->
-			<?php echo $this->form->renderField('id'); ?>
-			<?php echo $this->form->renderField('ordering'); ?>
-			<?php echo $this->form->renderField('state'); ?>
-			<?php echo $this->form->renderField('checked_out'); ?>
-			<?php echo $this->form->renderField('checked_out_time'); ?>
-			<?php echo $this->form->renderField('created_by'); ?>
-			<?php echo $this->form->renderField('modified_by'); ?>
-			<input type="hidden" name="task" value=""/>
-			<?php echo JHtml::_('form.token'); ?>
+			<!-- regular fields -->
+			<?php
+			foreach ($fields as $field){
+				$type = $this->form->getField($field)->getAttribute("type");
+				if($type == "hidden") continue;
+				echo $this->form->renderField($field);
+			}
+			?>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
 	<?php echo JHtml::_('bootstrap.endTabSet'); ?>
+
+	<!-- hidden fields -->
+	<?php
+	foreach ($fields as $field){
+		$type = $this->form->getField($field)->getAttribute("type");
+		if($type != "hidden") continue;
+		echo $this->form->renderField($field);
+	}
+	?>
+	<input type="hidden" name="task" value=""/>
+	<?php echo JHtml::_('form.token'); ?>
 </form>

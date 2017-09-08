@@ -26,12 +26,6 @@ class JnTrackerViewEmployee extends JnRadItemAdminView
 					"close",
 				),
 			),
-			"fields" => array(
-				"enable",
-				"name",
-				"type",
-				"notes",
-			),
 		),
 	);
 }

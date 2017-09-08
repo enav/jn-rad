@@ -22,6 +22,11 @@ class JnRadItemBaseTable extends JTable
 	 */
 	public function __construct(&$db)
 	{
+		// populate db_table_name if needed
+		if(empty($this->jnrad["jnrad_vars"]["db_table_name"])){
+			$this->jnrad["jnrad_vars"]["db_table_name"] = strtolower($this->jnrad["jnrad_asset_singular"]."s");
+		}
+
 		extract(JnRadHelper::prepare($this->jnrad));
 		// --- rad ---
 

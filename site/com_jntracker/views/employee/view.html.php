@@ -15,7 +15,6 @@ class JnTrackerViewEmployee extends JnRadItemSiteView
 	public $jnrad = array(
 		"jnrad_asset" => "Employee",
 		"jnrad_asset_singular" => "Employee",
-		"jnrad_asset_plural" => "Employees",
 		"jnrad_vars" => array(
 			"fields" => array(
 				"enable",

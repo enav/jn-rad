@@ -26,36 +26,45 @@ class JnRadItemsBaseModel extends JModelList
 	*/
 	public function __construct($config = array())
 	{
-		// feed jnrad_vars with the form content
+		// feed jnrad_vars with the form xml file content
+		// merge and update filter fields
 		$form = $this->getFilterForm(null, false);
+		$array = JnRadHelper::formGroupToArray($form, "filter", array("search"));
+		JnRadHelper::arrayMerge(
+			$this->jnrad["jnrad_vars"]["filter_fields"],
+			$array,
+			true
+		);
+		unset($array);
 
-		// list and merge filter fields
-		$fields = $form->getGroup("filter");
-		foreach ($fields as $field){
-			$array1[] = $field->getAttribute('name');
-		}
-		$array2 = $this->jnrad["jnrad_vars"]["filter_fields"];
-		$array2 = JnRadHelper::arrayMerge($array1, $array2);
-		$this->jnrad["jnrad_vars"]["filter_fields"] = $array2;
+		// merge and update populate state fields
+		JnRadHelper::arrayMerge(
+			$this->jnrad["jnrad_vars"]["populate_state_fields"],
+			$this->jnrad["jnrad_vars"]["filter_fields"],
+			true
+		);
 
-		// list and merge populate state fields
-		$array1 = $this->jnrad["jnrad_vars"]["populate_state_fields"];
-		$array2 = $this->jnrad["jnrad_vars"]["filter_fields"];
-		$array2 = JnRadHelper::arrayMerge($array1, $array2);
-		$this->jnrad["jnrad_vars"]["populate_state_fields"] = $array2;
+		// merge and update whitelist fields
+		JnRadHelper::arrayMerge(
+			$this->jnrad["jnrad_vars"]["whitelist_fields"],
+			$this->jnrad["jnrad_vars"]["filter_fields"],
+			true
+		);
+		JnRadHelper::arrayMerge(
+			$this->jnrad["jnrad_vars"]["whitelist_fields"],
+			$this->jnrad["jnrad_vars"]["populate_state_fields"],
+			true
+		);
+		JnRadHelper::arrayMerge(
+			$this->jnrad["jnrad_vars"]["whitelist_fields"],
+			$this->jnrad["jnrad_vars"]["ordering_fields"],
+			true
+		);
 
-		// list and merge whitelist fields
-		$array1 = $this->jnrad["jnrad_vars"]["whitelist_fields"];
-		$array2 = $this->jnrad["jnrad_vars"]["filter_fields"];
-		$array3 = $this->jnrad["jnrad_vars"]["populate_state_fields"];
-		$array4 = $this->jnrad["jnrad_vars"]["ordering_fields"];
-		$array4 = JnRadHelper::arrayMerge($array1, $array2, $array3, $array4);
-		$this->jnrad["jnrad_vars"]["whitelist_fields"] = $array4;
+		// set some default values
+		JnRadHelper::setDefaultDBTable($this->jnrad);
+		JnRadHelper::setDefaultJTable($this->jnrad);
 
-		// free memory
-		unset($array1, $array2, $array3, $array4);
-
-		// init jnrad
 		extract(JnRadHelper::prepare($this->jnrad));
 		// --- rad ---
 

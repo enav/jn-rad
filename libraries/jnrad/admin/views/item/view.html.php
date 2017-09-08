@@ -38,6 +38,16 @@ class JnRadItemAdminView extends JnRadItemBaseView
 			throw new Exception(implode("\n", $errors));
 		}
 
+		// feed jnrad_vars with the form xml file content
+		// merge and update form fields
+		$array = JnRadHelper::formGroupToArray($this->form);
+		JnRadHelper::arrayMerge(
+			$this->jnrad["jnrad_vars"]["fields"],
+			$array,
+			true
+		);
+		unset($array);
+
 		$jnrad_helper::addToolbar($this);
 
 		parent::display($tpl);

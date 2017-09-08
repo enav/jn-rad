@@ -31,6 +31,9 @@ class JnRadHelper
 
 	/**
 	 * Prepare jnrad array for posterior extraction
+	 *
+	 * @param   array  $jnrad  jnrad var
+	 *
 	 */
 	public static function prepare($jnrad = array())
 	{
@@ -94,7 +97,7 @@ class JnRadHelper
 	/**
 	 * Adds the sidebar.
 	 *
-	 * @param   string  $view  Active view name.
+	 * @param   JView  $view  Views object.
 	 *
 	 * @return  void
 	 */
@@ -120,6 +123,11 @@ class JnRadHelper
 
 	/**
 	 * Gets a list of the actions that can be performed.
+	 *
+	 * @param   JView  $view  Views object.
+	 *
+	 * @return  void
+	 *
 	 */
 	public static function getActions($view)
 	{
@@ -142,7 +150,10 @@ class JnRadHelper
 	/**
 	 * Add the page title and toolbar.
 	 *
-	 * @return void
+	 * @param   JView  $view  Views object.
+	 *
+	 * @return  void
+	 *
 	 */
 	public static function addToolbar($view)
 	{
@@ -244,22 +255,97 @@ class JnRadHelper
 
 
 	/**
-	 * Merge arrays and remove duplicates
+	 * Merge two array, remove duplicates and update the first array if needed
 	 *
-	 * @param   arrays  Arrays.
+	 * @param    array  $array1  An array
+	 * @param    array  $array2  An array
+	 * @param    array  $update  If true stores result in $array1
 	 *
-	 * @return    Array
+	 * @return   Array
+	 *
 	 */
-	public static function arrayMerge(...$arrays){
-		$newArray = array();
+	public static function arrayMerge(&$array1, $array2, $update = false){
+		$array = array();
 
-		foreach ($arrays as $array){
-			if(!isset($array)) continue;
-			$newArray = array_merge($newArray, $array);
+		if(!isset($array1)) $array1 = array();
+		if(!isset($array2)) $array2 = array();
+
+		$array = array_unique(array_merge($array1, $array2));
+
+		if($update){
+			$array1 = $array;
 		}
 
-		return array_unique($newArray);
+		return $array;
 	}
+
+
+	/**
+	 * Sets default DB table name if needed
+	 *
+	 * @param   array  $jnrad  jnrad var
+	 *
+	 * @return   void
+	 *
+	 */
+	public static function setDefaultDBTable(&$jnrad){
+		if(empty($jnrad["jnrad_vars"]["db_table_name"])){
+			$jnrad["jnrad_vars"]["db_table_name"] = strtolower($jnrad["jnrad_asset_singular"]."s");
+		}
+	}
+
+
+	/**
+	 * Sets default JTable name if needed
+	 *
+	 * @param   array  $jnrad  jnrad var
+	 *
+	 */
+	public static function setDefaultJTable(&$jnrad){
+		if(empty($jnrad["jnrad_vars"]["j_table_name"])){
+			$jnrad["jnrad_vars"]["j_table_name"] = strtolower($jnrad["jnrad_asset_singular"]);
+		}
+	}
+
+
+	/**
+	 * Creates an array of field names from a form group
+	 *
+	 * @param   JForm   $form       Form object
+	 * @param   string  $groupName  (optional) Form group name. If not set return all fields
+	 * @param   array   $exclude    (Optional) Array of names to exclude
+	 *
+	 * @return    Array
+	 *
+	 */
+	public static function formGroupToArray($form, $groupName = "", $exclude = array()){
+		$array = array();
+		$fields = $form->getGroup($groupName);
+
+		foreach ($fields as $field){
+			$name = $field->getAttribute('name');
+
+			if(in_array($name, $exclude)){
+				continue;
+			}
+
+			$array[] = $field->getAttribute('name');
+		}
+
+		return $array;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 

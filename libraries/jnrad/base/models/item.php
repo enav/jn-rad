@@ -19,6 +19,24 @@ class JnRadItemBaseModel extends JModelAdmin
 
 
 	/**
+	 * Constructor.
+	 *
+	 * @param   array  $config  An optional associative array of configuration settings.
+	 *
+	 * @see     JModelLegacy
+	 * @since   12.2
+	 */
+	public function __construct($config = array())
+	{
+		// set some default values
+		JnRadHelper::setDefaultDBTable($this->jnrad);
+		JnRadHelper::setDefaultJTable($this->jnrad);
+
+		parent::__construct($config);
+	}
+
+
+	/**
 	 * Returns a reference to the a Table object, always creating it.
 	 */
 	public function getTable($type = '', $prefix = '', $config = array())

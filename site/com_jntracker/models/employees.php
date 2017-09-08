@@ -16,27 +16,9 @@ class JnTrackerModelEmployees extends JnRadItemsSiteModel
 	public $jnrad = array(
 		"jnrad_asset" => "Employees",
 		"jnrad_asset_singular" => "Employee",
-		"jnrad_asset_plural" => "Employees",
 		"jnrad_vars" => array(
-			"db_table_name" => "employees",
-			"whitelist_fields" => array(
-				"search",
-				"enable",
-				"ordering",
-				"name",
-				"type",
-				"id",
-			),
-			"populate_state_fields" => array(
-				"search",
-				"enable",
-				"type",
-			),
 			"ordering_fields" => array(
-				"enable",
 				"name",
-				"type",
-				"id",
 			),
 			"ordering_default" => array(
 				"field" => "name",
@@ -44,10 +26,6 @@ class JnTrackerModelEmployees extends JnRadItemsSiteModel
 			),
 			"search_fields" => array(
 				"name",
-			),
-			"filter_fields" => array(
-				"enable",
-				"type",
 			),
 		)
 	);

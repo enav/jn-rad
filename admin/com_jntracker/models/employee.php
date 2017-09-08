@@ -17,10 +17,6 @@ class JnTrackerModelEmployee extends JnRadItemAdminModel
 		"jnrad_asset" => "Employee",
 		"jnrad_asset_singular" => "Employee",
 		"jnrad_asset_plural" => "Employees",
-		"jnrad_vars" => array(
-			"db_table_name" => "employees",
-			"j_table_name" => "employee",
-		),
 	);
 }
 

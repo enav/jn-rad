@@ -25,6 +25,7 @@ class JnRadItemBaseController extends JControllerForm
 		// --- rad ---
 
 		$this->view_list = $jnrad_asset_plural;
+
 		parent::__construct();
 	}
 }
