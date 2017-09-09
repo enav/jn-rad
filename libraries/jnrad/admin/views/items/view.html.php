@@ -42,9 +42,9 @@ class JnRadItemsAdminView extends JnRadItemsBaseView
 			throw new Exception(implode("\n", $errors));
 		}
 
-		$jnrad_helper::addToolbar($this);
+		JnRadHelper::addToolbar($this);
 
-		$jnrad_helper::addSidebar($this);
+		JnRadHelper::addSidebar($this);
 
 		parent::display($tpl);
 	}

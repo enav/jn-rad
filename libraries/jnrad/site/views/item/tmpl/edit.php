@@ -9,8 +9,10 @@ defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 extract(JnRadHelper::prepare($this->jnrad));
-$fields = $jnrad_vars["fields"];
 // --- rad ---
+
+$fields = $jnrad_vars["fields"];
+
 JHtml::_('behavior.formvalidation');
 JHtml::_('formbehavior.chosen', 'select');
 JHtml::_('behavior.keepalive');
@@ -34,15 +36,32 @@ JHtml::_('behavior.keepalive');
 	<div class="form-actions">
 		<button type="submit" class="btn btn-primary">Save changes</button>
 	</div>
-	<!-- custom fields -->
-	<?php foreach ($fields as $field) : ?>
-		<?php echo $this->form->renderField($field); ?>
-	<?php endforeach; ?>
+
+	<!-- regular fields -->
+	<?php
+	foreach ($fields as $field){
+		$type = $this->form->getField($field)->getAttribute("type");
+		if($type == "hidden") continue;
+		echo $this->form->renderField($field);
+	}
+	?>
+
 	<!-- system fields -->
 	<input type="hidden" name="option" value="<?php echo "com_$jnrad_nameL"; ?>"/>
+	<input type="hidden" name="layout" value="edit"/>
 	<input type="hidden" name="task" value="<?php echo $jnrad_asset_singularL; ?>.apply"/>
 	<input type="hidden" name="id" value="<?php echo $this->item->id; ?>"/>
 	<?php echo JHtml::_('form.token'); ?>
+
+	<!-- hidden fields -->
+	<?php
+	foreach ($fields as $field){
+		$type = $this->form->getField($field)->getAttribute("type");
+		if($type != "hidden") continue;
+		echo $this->form->renderField($field);
+	}
+	?>
+
 	<!-- form actions -->
 	<div class="form-actions">
 		<button type="submit" class="btn btn-primary">Save changes</button>

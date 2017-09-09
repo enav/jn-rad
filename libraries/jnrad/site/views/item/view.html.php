@@ -12,32 +12,5 @@ defined('_JEXEC') or die;
  */
 class JnRadItemSiteView extends JnRadItemBaseView
 {
-	protected $state;
-
-	protected $item;
-
-	protected $form;
-
-
-	/**
-	 * Display the view
-	 */
-	public function display($tpl = null)
-	{
-		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
-
-		$model = $this->getModel();
-		$this->state = $model->getState();
-		$this->item  = $model->getItem();
-		$this->form  = $model->getForm();
-
-		// Check for errors.
-		if (count($errors = $this->get('Errors')))
-		{
-			throw new Exception(implode("\n", $errors));
-		}
-
-		parent::display($tpl);
-	}
+	//
 }

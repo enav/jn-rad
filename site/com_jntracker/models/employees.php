@@ -16,6 +16,7 @@ class JnTrackerModelEmployees extends JnRadItemsSiteModel
 	public $jnrad = array(
 		"jnrad_asset" => "Employees",
 		"jnrad_asset_singular" => "Employee",
+		"jnrad_asset_plural" => "Employees",
 		"jnrad_vars" => array(
 			"ordering_fields" => array(
 				"name",

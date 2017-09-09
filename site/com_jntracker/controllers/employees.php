@@ -15,6 +15,7 @@ class JnTrackerControllerEmployees extends JnRadItemsSiteController
 	public $jnrad = array(
 		"jnrad_asset" => "Employees",
 		"jnrad_asset_singular" => "Employee",
+		"jnrad_asset_plural" => "Employees",
 	);
 }
 

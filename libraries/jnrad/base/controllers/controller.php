@@ -23,8 +23,7 @@ class JnRadBaseController extends JControllerLegacy
 	 */
 	public function display($cachable = false, $urlparams = false)
 	{
-		$jnrad_helper = JnRadHelper;
-		extract($jnrad_helper::prepare($this->jnrad));
+		extract(JnRadHelper::prepare($this->jnrad));
 		// -- rad --
 
 		$defautlView = $jnrad_vars["default_view"];

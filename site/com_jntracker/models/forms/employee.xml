@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
 	<fields>
-		<!-- basic -->
+		<!-- regular fields -->
 		<field
 			name="enable"
 			type="radio" 
@@ -39,43 +39,11 @@
 			description="COM_JNTRACKER_FIELD_NOTES_DESC" 
 		/>
 		
-		<!-- system -->
+		<!-- system fields -->
 		<field
 			name="id" 
-			type="text"
-			readonly="true"
+			type="hidden"
 			default="0"
-		/>
-		<field 
-			name="ordering"
-			type="text"
-			readonly="true"
-		/>
-		<field
-			name="checked_out" 
-			type="text"
-			readonly="true"
-			filter="unset"
-		/>
-		<field
-			name="checked_out_time" 
-			type="text"
-			readonly="true"
-			default="0000-00-00 00:00:00" 
-			filter="unset"
-		/>
-		<field
-			name="created_by" 
-			type="createdby" 
-			readonly="true"
-			default="0" 
-			
-		/>
-		<field 
-			name="modified_by" 
-			type="modifiedby" 
-			readonly="true"
-			default="0" 
 		/>
 	</fields>
 </form>

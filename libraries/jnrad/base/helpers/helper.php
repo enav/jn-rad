@@ -189,7 +189,7 @@ class JnRadHelper
 				case 'add':
 					if ($canDo->get("core.create"))
 					{
-						JToolBarHelper::addNew("$jnrad_assetL.add", "JTOOLBAR_NEW");
+						JToolBarHelper::addNew("$jnrad_asset_singularL.add", "JTOOLBAR_NEW");
 					}
 					break;
 				case 'edit':

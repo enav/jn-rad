@@ -7,5 +7,6 @@
 // No direct access
 defined('_JEXEC') or die;
 
+
 require_once JPATH_LIBRARIES.'/jnrad/site/views/item/tmpl/edit.php';
 

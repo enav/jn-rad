@@ -50,6 +50,7 @@ class JnRadItemBaseModel extends JModelAdmin
 		return JTable::getInstance($type, $prefix, $config);
 	}
 
+
 	/**
 	 * Method to get the record form.
 	 */

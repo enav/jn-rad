@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
 	<fields>
-		<!-- basic -->
+		<!-- regular fields -->
 		<field
 			name="enable"
 			type="radio" 
@@ -39,7 +39,7 @@
 			description="COM_JNTRACKER_FIELD_NOTES_DESC" 
 		/>
 		
-		<!-- system -->
+		<!-- system fields -->
 		<field
 			name="id" 
 			type="hidden"
