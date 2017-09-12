@@ -181,72 +181,73 @@ class JnRadHelper
 
 		JToolBarHelper::title(JText::_("COM_{$jnrad_nameU}_PAGETITLE_{$jnrad_assetU}"), $icon);
 
-		foreach ($buttons as $button){
-			switch ($button){
-				case 'divider':
-					JToolBarHelper::divider();
-					break;
-				case 'add':
-					if ($canDo->get("core.create"))
-					{
-						JToolBarHelper::addNew("$jnrad_asset_singularL.add", "JTOOLBAR_NEW");
-					}
-					break;
-				case 'edit':
-					if ($canDo->get("core.edit"))
-					{
-						JToolBarHelper::editList("$jnrad_assetL.edit", "JTOOLBAR_EDIT");
-					}
-					break;
-				case 'delete':
-					if ($canDo->get("core.edit"))
-					{
-						JToolBarHelper::deleteList("", "$jnrad_assetL.delete", "JTOOLBAR_DELETE");
-					}
-					break;
-				case 'checkin':
-					if ($canDo->get("core.edit"))
-					{
-						JToolBarHelper::custom("$jnrad_assetL.checkin", "checkin.png", "checkin_f2.png", "JTOOLBAR_CHECKIN", true);
-					}
-					break;
-				case 'admin':
-					if ($canDo->get("core.admin"))
-					{
-						JToolBarHelper::preferences("com_$jnrad_nameL");
-					}
-					break;
-				case 'save':
-					if (!$checkedOut && ($canDo->get('core.edit') || ($canDo->get('core.create'))))
-					{
-						JToolBarHelper::apply("$jnrad_assetL.apply", 'JTOOLBAR_APPLY');
-					}
-					break;
-				case 'save-and-close':
-					if (!$checkedOut && ($canDo->get('core.edit') || ($canDo->get('core.create'))))
-					{
-						JToolBarHelper::save("$jnrad_assetL.save", 'JTOOLBAR_SAVE');
-					}
-					break;
-				case 'save-and-new':
-					if (!$checkedOut && ($canDo->get('core.create')))
-					{
-						JToolBarHelper::custom("$jnrad_assetL.save2new", 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
-					}
-					break;
-				case 'close':
-					if (empty($view->item->id))
-					{
-						JToolBarHelper::cancel("$jnrad_assetL.cancel", 'JTOOLBAR_CANCEL');
-					}
-					else
-					{
-						JToolBarHelper::cancel("$jnrad_assetL.cancel", 'JTOOLBAR_CLOSE');
-					}
-					break;
+		if($buttons){
+			foreach ($buttons as $button){
+				switch ($button){
+					case 'divider':
+						JToolBarHelper::divider();
+						break;
+					case 'add':
+						if ($canDo->get("core.create"))
+						{
+							JToolBarHelper::addNew("$jnrad_asset_singularL.add", "JTOOLBAR_NEW");
+						}
+						break;
+					case 'edit':
+						if ($canDo->get("core.edit"))
+						{
+							JToolBarHelper::editList("$jnrad_assetL.edit", "JTOOLBAR_EDIT");
+						}
+						break;
+					case 'delete':
+						if ($canDo->get("core.edit"))
+						{
+							JToolBarHelper::deleteList("", "$jnrad_assetL.delete", "JTOOLBAR_DELETE");
+						}
+						break;
+					case 'checkin':
+						if ($canDo->get("core.edit"))
+						{
+							JToolBarHelper::custom("$jnrad_assetL.checkin", "checkin.png", "checkin_f2.png", "JTOOLBAR_CHECKIN", true);
+						}
+						break;
+					case 'admin':
+						if ($canDo->get("core.admin"))
+						{
+							JToolBarHelper::preferences("com_$jnrad_nameL");
+						}
+						break;
+					case 'save':
+						if (!$checkedOut && ($canDo->get('core.edit') || ($canDo->get('core.create'))))
+						{
+							JToolBarHelper::apply("$jnrad_assetL.apply", 'JTOOLBAR_APPLY');
+						}
+						break;
+					case 'save-and-close':
+						if (!$checkedOut && ($canDo->get('core.edit') || ($canDo->get('core.create'))))
+						{
+							JToolBarHelper::save("$jnrad_assetL.save", 'JTOOLBAR_SAVE');
+						}
+						break;
+					case 'save-and-new':
+						if (!$checkedOut && ($canDo->get('core.create')))
+						{
+							JToolBarHelper::custom("$jnrad_assetL.save2new", 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
+						}
+						break;
+					case 'close':
+						if (empty($view->item->id))
+						{
+							JToolBarHelper::cancel("$jnrad_assetL.cancel", 'JTOOLBAR_CANCEL');
+						}
+						else
+						{
+							JToolBarHelper::cancel("$jnrad_assetL.cancel", 'JTOOLBAR_CLOSE');
+						}
+						break;
+				}
 			}
 		}
-
 
 		// TODO: i have no idea what is this for :(
 		// Set sidebar action - New in 3.0
@@ -347,5 +348,6 @@ class JnRadHelper
 
 
 }
+
 
 

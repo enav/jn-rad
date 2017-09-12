@@ -6,7 +6,7 @@ Rapid application development framework for Joomla! components.
 
 This is a work in progress, feel free to use it, collaborate, report issues or request new features. We don't have any release schedule or planification "yet", we will release/update as soon as we require/desire. 
 
-Component development takes so much initial boilerplate and preparation that we decided to create our own framework for rapid component development in order to automatize repetitive and redundant tasks that we encounter on every single new project wasting always at least 2 hours of initial setup and many minutes on the setup of each aditional asset such as models, views and controllers.
+Component development takes so much initial boilerplate and preparation that we decided to create our own framework for rapid component development in order to automatize repetitive and redundant tasks.
 
 ## Features
 
@@ -23,7 +23,7 @@ Component development takes so much initial boilerplate and preparation that we 
 
 This project is pretty much underder initial development, we are working on a basic doucmentation, examples and installers. 
 
-PLease refer the wiki page for more details.
+Refer to the [wiki](https://github.com/enav/jn-rad/wiki) page for more details.
 
 ## Change log:
 

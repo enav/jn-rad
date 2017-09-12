@@ -12,7 +12,7 @@ $jnrad = array(
 	"jnrad_vars" => array(
 		"sidebar" => array(
 			"items" => array(
-				"employees"
+				"employees",
 			),
 		),
 	),
