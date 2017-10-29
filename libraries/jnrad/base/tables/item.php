@@ -7,6 +7,7 @@
 // No direct access
 defined("_JEXEC") or die;
 
+use Joomla\CMS\Table\Table as JTable;
 use Joomla\Utilities\ArrayHelper;
 
 /**
@@ -28,7 +29,6 @@ class JnRadItemBaseTable extends JTable
 		}
 
 		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
 
 		$dbTableName = $jnrad_vars["db_table_name"];
 
@@ -42,7 +42,6 @@ class JnRadItemBaseTable extends JTable
 	public function bind($array, $ignore = "")
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
 
 		$dbTableName = $jnrad_vars["db_table_name"];
 

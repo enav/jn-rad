@@ -7,6 +7,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
+use Joomla\CMS\MVC\Controller\AdminController as JControllerAdmin;
 
 /**
  * Items controller base class.
@@ -22,7 +23,6 @@ class JnRadItemsBaseController extends JControllerAdmin
 	public function getModel($name = '', $prefix = '', $config = array())
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
 
 		if(empty($name)){
 			$name = $jnrad_asset_singularL;

@@ -104,7 +104,6 @@ class JnRadHelper
 	public static function addSidebar(&$view)
 	{
 		extract(self::prepare($view->jnrad));
-		// --- rad ---
 
 		$items = $jnrad_vars["sidebar"]["items"];
 
@@ -132,7 +131,6 @@ class JnRadHelper
 	public static function getActions($view)
 	{
 		extract(self::prepare($view->jnrad));
-		// --- rad ---
 
 		$user    = JFactory::getUser();
 		$result  = new JObject;
@@ -158,7 +156,6 @@ class JnRadHelper
 	public static function addToolbar($view)
 	{
 		extract(self::prepare($view->jnrad));
-		// --- rad ---
 
 		$buttons = $jnrad_vars["toolbar"]["buttons"];
 		$icon = $jnrad_vars["toolbar"]["icon"];
@@ -348,6 +345,5 @@ class JnRadHelper
 
 
 }
-
 
 

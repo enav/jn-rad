@@ -19,7 +19,6 @@ class JnRadItemAdminView extends JnRadItemBaseView
 	public function display($tpl = null)
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
 
 		JnRadHelper::addToolbar($this);
 

@@ -31,7 +31,6 @@ class JnRadSiteRouter extends JComponentRouterBase
 	public function __construct($app = null, $menu = null)
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
 
 		JLoader::registerPrefix($jnrad_name, JPATH_SITE . "/components/com_$jnrad_nameL");
 

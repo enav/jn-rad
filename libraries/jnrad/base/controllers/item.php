@@ -7,6 +7,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\MVC\Controller\FormController as JControllerForm;
 
 /**
  * Item controller base class.
@@ -22,7 +23,6 @@ class JnRadItemBaseController extends JControllerForm
 	public function __construct()
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
 
 		$this->view_list = $jnrad_asset_plural;
 

@@ -7,6 +7,8 @@
 // No direct access
 defined("_JEXEC") or die;
 
+use Joomla\CMS\MVC\View\HtmlView as JViewLegacy;
+
 /**
  * Items view base class.
  */

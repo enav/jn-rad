@@ -9,7 +9,6 @@ defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/');
 extract(JnRadHelper::prepare($this->jnrad));
-// --- rad ---
 ?>
 <ul>
 	<?php foreach ($this->items as $item) : ?>
@@ -26,4 +25,3 @@ extract(JnRadHelper::prepare($this->jnrad));
 	<?php endforeach; ?>
 </ul>
 <?php echo $this->pagination->getListFooter(); ?>
-

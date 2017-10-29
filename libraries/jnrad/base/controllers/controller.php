@@ -3,6 +3,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\MVC\Controller\BaseController as JControllerLegacy;
 
 /**
  * Main controller base class
@@ -24,7 +25,6 @@ class JnRadBaseController extends JControllerLegacy
 	public function display($cachable = false, $urlparams = false)
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
-		// -- rad --
 
 		$defautlView = $jnrad_vars["default_view"];
 

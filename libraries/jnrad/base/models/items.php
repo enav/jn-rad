@@ -7,6 +7,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\MVC\Model\ListModel as JModelList;
 
 /**
  * Items model base class.
@@ -66,7 +67,6 @@ class JnRadItemsBaseModel extends JModelList
 		JnRadHelper::setDefaultJTable($this->jnrad);
 
 		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
 
 		// pass whitelist fields to parent constructor
 		$fields = $jnrad_vars["whitelist_fields"];
@@ -96,7 +96,6 @@ class JnRadItemsBaseModel extends JModelList
 	protected function populateState($ordering = null, $direction = null)
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
 
 		$fields = $jnrad_vars["populate_state_fields"];
 
@@ -138,7 +137,6 @@ class JnRadItemsBaseModel extends JModelList
 	protected function getStoreId($id = '')
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
 
 		$fields = $jnrad_vars["whitelist_fields"];
 
@@ -162,7 +160,6 @@ class JnRadItemsBaseModel extends JModelList
 	protected function getListQuery()
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
 
 		$searchFields = $jnrad_vars["search_fields"];
 		$filterFields = $jnrad_vars["filter_fields"];

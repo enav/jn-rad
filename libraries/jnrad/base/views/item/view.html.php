@@ -7,6 +7,8 @@
 // No direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\MVC\View\HtmlView as JViewLegacy;
+
 /**
  * Items view base class
  */
@@ -27,7 +29,6 @@ class JnRadItemBaseView extends JViewLegacy
 	public function display($tpl = null)
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
 
 		$model = $this->getModel();
 		$this->state = $model->getState();

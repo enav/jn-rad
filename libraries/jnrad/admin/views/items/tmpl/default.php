@@ -9,7 +9,6 @@ defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/');
 extract(JnRadHelper::prepare($this->jnrad));
-// --- rad ---
 
 $columns = $jnrad_vars["grid"]["columns"];
 

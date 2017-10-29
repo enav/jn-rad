@@ -27,7 +27,6 @@ class JnRadItemsAdminView extends JnRadItemsBaseView
 	public function display($tpl = null)
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
 
 		$model = $this->getModel();
 		$this->items         = $model->getItems();

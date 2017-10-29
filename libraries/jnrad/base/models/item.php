@@ -7,6 +7,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
+use Joomla\CMS\MVC\Model\AdminModel AS JModelAdmin;
 
 /**
  * Item model base class.
@@ -42,11 +43,11 @@ class JnRadItemBaseModel extends JModelAdmin
 	public function getTable($type = '', $prefix = '', $config = array())
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
 
 		if(empty($type)) $type = $jnrad_vars["j_table_name"];
 		if(empty($prefix)) $prefix = "{$jnrad_name}Table";
-
+		
+		
 		return JTable::getInstance($type, $prefix, $config);
 	}
 
@@ -57,7 +58,6 @@ class JnRadItemBaseModel extends JModelAdmin
 	public function getForm($data = array(), $loadData = true)
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
 
 		// Get the form.
 		$form = $this->loadForm(
@@ -82,7 +82,6 @@ class JnRadItemBaseModel extends JModelAdmin
 	protected function loadFormData()
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
 
 		// Check the session for previously entered form data.
 		$data = JFactory::getApplication()->getUserState(
@@ -110,7 +109,6 @@ class JnRadItemBaseModel extends JModelAdmin
 	protected function prepareTable($table)
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
 
 		$dbTableName = $jnrad_vars["db_table_name"];
 

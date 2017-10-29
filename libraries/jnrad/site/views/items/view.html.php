@@ -27,7 +27,6 @@ class JnRadItemsSiteView extends JnRadItemsBaseView
 	public function display($tpl = null)
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
 
 		$model = $this->getModel();
 		$this->items         = $model->getItems();
@@ -55,7 +54,6 @@ class JnRadItemsSiteView extends JnRadItemsBaseView
 	protected function _prepareDocument()
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
-		// --- rad ---
 
 		$app   = JFactory::getApplication();
 		$menus = $app->getMenu();

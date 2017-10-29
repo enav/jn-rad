@@ -24,7 +24,6 @@ class JnRadSiteController extends JnRadBaseController
 	public function display($cachable = false, $urlparams = false)
 	{
 		extract(JnRadHelper::prepare($this->jnrad));
-		// -- rad --
 
 		$defautlView = $jnrad_vars["default_view"];
 
