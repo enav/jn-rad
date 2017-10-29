@@ -1,4 +1,4 @@
-# jn-rad - v 0.0.0
+# jnrad - v 0.0.0
 
 Rapid application development framework for Joomla! components.
 
@@ -23,7 +23,7 @@ Component development takes so much initial boilerplate and preparation that we 
 
 This project is pretty much underder initial development, we are working on a basic doucmentation, examples and installers. 
 
-Refer to the [wiki](https://github.com/enav/jn-rad/wiki) page for more details.
+Refer to the [wiki](https://github.com/enav/jnrad/wiki) page for more details.
 
 ## Change log:
 
